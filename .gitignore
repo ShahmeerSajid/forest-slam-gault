@@ -17,3 +17,5 @@ evo_data/individual_clouds_voxel_0.10m/
 evo_data/individual_clouds_voxel_0.20m/
 venv/*.zip
 .DS_Store
+venv/
+venv/
