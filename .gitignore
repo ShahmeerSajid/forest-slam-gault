@@ -7,14 +7,17 @@ stein-am-rhein_data/individual_clouds/
 stein-am-rhein_data/individual_clouds_voxel_0.05m/
 stein-am-rhein_data/individual_clouds_voxel_0.10m/
 stein-am-rhein_data/individual_clouds_voxel_0.20m/
+stein-am-rhein_data/individual_clouds.zip
 forest-of-dean_data/individual_clouds/
 forest-of-dean_data/individual_clouds_voxel_0.05m/
 forest-of-dean_data/individual_clouds_voxel_0.10m/
 forest-of-dean_data/individual_clouds_voxel_0.20m/
+forest-of-dean_data/individual_clouds.zip
 evo_data/individual_clouds/
 evo_data/individual_clouds_voxel_0.05m/
 evo_data/individual_clouds_voxel_0.10m/
 evo_data/individual_clouds_voxel_0.20m/
+evo_data/individual_clouds.zip
 venv/*.zip
 .DS_Store
 venv/
