@@ -1,0 +1,7 @@
+venv/
+.DS_Store
+individual_clouds/
+individual_clouds_voxel_0.05m/
+individual_clouds_voxel_0.10m/
+individual_clouds_voxel_0.20m/
+individual_clouds.zip
