@@ -10,7 +10,7 @@ dataset for each site, which is a more reliable basis for deciding which
 voxel size to standardize on going forward.
 
 ---> I am doing this so I can get an idea of how much there is a reduction of data points
-based on the 
+based on the voxelization sizes at 0.05m, 0.10m and 0.20m respectively
 
 
 """
