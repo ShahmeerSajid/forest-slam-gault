@@ -100,7 +100,7 @@ def voxelize_and_save_all_scans(source_folder, output_folders, voxel_sizes, site
  
  
 if __name__ == "__main__":
-    project_root = "/Users/shahmeer/forest-slam-project"
+    project_root = os.path.dirname(os.path.abspath(__file__))
     voxel_sizes_to_generate = [0.05, 0.10, 0.20]
  
     site_folders = get_site_folders(project_root)

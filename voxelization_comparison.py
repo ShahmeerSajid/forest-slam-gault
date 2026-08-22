@@ -144,7 +144,7 @@ def visualize_comparison(original_cloud, downsampled_cloud, voxel_size):
  
  
 if __name__ == "__main__":
-    project_root = "/Users/shahmeer/forest-slam-project"
+    project_root = os.path.dirname(os.path.abspath(__file__))
  
     site_to_test = "stein-am-rhein_data" # Important ---> WE HAVE 4 different forest to test from!
  

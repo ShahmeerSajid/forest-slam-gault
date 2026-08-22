@@ -138,7 +138,7 @@ def print_summary_table(all_site_results, voxel_sizes):
 
 
 if __name__ == "__main__":
-    project_root = "/Users/shahmeer/forest-slam-project"
+    project_root = os.path.dirname(os.path.abspath(__file__))
     voxel_sizes_to_test = [0.05, 0.10, 0.20]
 
     site_folders = get_site_folders(project_root)
