@@ -130,38 +130,39 @@ if __name__ == "__main__":
     
     
 
-# Conclusion I drew from the results:
+
 
 # Site: wytham_data
-#   Minimum gap 30 scans: 60 positive pairs found
-#   Minimum gap 50 scans: 60 positive pairs found
-#   Minimum gap 75 scans: 54 positive pairs found
-#   Minimum gap 100 scans: 51 positive pairs found
+# Total scans: 625
+# Average distance between consecutive scans: 1.1124m
+# Median distance between consecutive scans: 1.1092m
+# Total path length: 694.11m
+# Straight-line distance from first scan to last scan: 3.20m
+# Approximate number of scans needed to travel 1.5m (based on average spacing): 1.3 scans
+
 
 # Site: stein-am-rhein_data
-#   Minimum gap 30 scans: 417 positive pairs found
-#   Minimum gap 50 scans: 394 positive pairs found
-#   Minimum gap 75 scans: 331 positive pairs found
-#   Minimum gap 100 scans: 305 positive pairs found
+# Total scans: 463
+# Average distance between consecutive scans: 1.2212m
+# Median distance between consecutive scans: 1.2020m
+# Total path length: 564.17m
+# Straight-line distance from first scan to last scan: 97.36m
+# Approximate number of scans needed to travel 1.5m (based on average spacing): 1.2 scans
+
 
 # Site: forest-of-dean_data
-#   Minimum gap 30 scans: 113 positive pairs found
-#   Minimum gap 50 scans: 71 positive pairs found
-#   Minimum gap 75 scans: 67 positive pairs found
-#   Minimum gap 100 scans: 67 positive pairs found
+# Total scans: 625
+# Average distance between consecutive scans: 1.1429m
+# Median distance between consecutive scans: 1.1367m
+# Total path length: 713.15m
+# Straight-line distance from first scan to last scan: 38.00m
+# Approximate number of scans needed to travel 1.5m (based on average spacing): 1.3 scans
+
 
 # Site: evo_data
-#   Minimum gap 30 scans: 1109 positive pairs found
-#   Minimum gap 50 scans: 1098 positive pairs found
-#   Minimum gap 75 scans: 1043 positive pairs found
-#   Minimum gap 100 scans: 927 positive pairs found
-
-
-# Each number: 30, 50, 75, and 100 scans is just a different rule for deciding how far apart two scans need to be in the robot's journey before we call it a real revisit.
-# 30 scans: More relaxed → finds more possible loop closures, but some could be normal movement.
-# 50 scans: A middle/balanced choice.
-# 75 scans: More strict -> fewer pairs.
-# 100 scans: Very strict -> fewer pairs, but the pairs are more likely to be real revisits.
-# When we tested them, increasing the gap from 30 to 100 didn't remove a huge number of pairs. The number of positive pairs only decreased by about 10–25% at most sites.
-# This suggests that most of the pairs we found at 30 scans were probably real revisits, rather than just the robot slowly moving through the same area. 
-# So we chose 50 scans as a reasonable middle ground, strict enough to avoid obvious false positives, but not so strict that we lose too many real loop closures.
+# Total scans: 1002
+# Average distance between consecutive scans: 1.4789m
+# Median distance between consecutive scans: 1.4862m
+# Total path length: 1480.33m
+# Straight-line distance from first scan to last scan: 141.84m
+# Approximate number of scans needed to travel 1.5m (based on average spacing): 1.0 scans

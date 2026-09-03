@@ -139,7 +139,7 @@ def print_summary_table(all_site_results, voxel_sizes):
 
 if __name__ == "__main__":
     project_root = os.path.dirname(os.path.abspath(__file__))
-    voxel_sizes_to_test = [0.05, 0.10, 0.20]
+    voxel_sizes_to_test = [0.05, 0.10, 0.20, 0.40]
 
     site_folders = get_site_folders(project_root)
     all_site_results = {}
@@ -174,34 +174,40 @@ if __name__ == "__main__":
 #   Voxel size 0.05m: 41.7% average reduction
 #   Voxel size 0.1m: 49.7% average reduction
 #   Voxel size 0.2m: 62.1% average reduction
+#   Voxel size 0.4m: 74.9% average reduction
 
 # Processing site: stein-am-rhein_data
 #   Voxel size 0.05m: 48.2% average reduction
 #   Voxel size 0.1m: 59.0% average reduction
 #   Voxel size 0.2m: 71.8% average reduction
+#   Voxel size 0.4m: 83.7% average reduction
 
 # Processing site: forest-of-dean_data
 #   Voxel size 0.05m: 47.9% average reduction
 #   Voxel size 0.1m: 56.8% average reduction
 #   Voxel size 0.2m: 69.1% average reduction
+#   Voxel size 0.4m: 80.7% average reduction
 
 # Processing site: evo_data
 #   Voxel size 0.05m: 46.1% average reduction
 #   Voxel size 0.1m: 54.8% average reduction
 #   Voxel size 0.2m: 66.5% average reduction
+#   Voxel size 0.4m: 78.1% average reduction
 
 
 
-# Average Point Reduction Summary
 
-# Site                         0.05m        0.1m        0.2m
+# Average Point Reduction Summary is as follows:
 
 
-# wytham_data                  41.7%       49.7%       62.1%
+# Site                         0.05m        0.1m        0.2m        0.4m
+
+
+# wytham_data                  41.7%       49.7%       62.1%       74.9%
 #   (based on 625 scans)
-# stein-am-rhein_data          48.2%       59.0%       71.8%
+# stein-am-rhein_data          48.2%       59.0%       71.8%       83.7%
 #   (based on 463 scans)
-# forest-of-dean_data          47.9%       56.8%       69.1%
+# forest-of-dean_data          47.9%       56.8%       69.1%       80.7%
 #   (based on 625 scans)
-# evo_data                     46.1%       54.8%       66.5%
+# evo_data                     46.1%       54.8%       66.5%       78.1%
 #   (based on 1002 scans)
