@@ -60,6 +60,8 @@ from rosbags.rosbag2 import Reader as Rosbag2Reader
 from rosbags.typesys import Stores, get_typestore
  
  
+ 
+ 
 def load_lidar_dataset(bag_folder_path, lidar_topic_name):
     """
     This function opens the ROS2 bag and loads only the LiDAR scan messages
@@ -73,9 +75,16 @@ def load_lidar_dataset(bag_folder_path, lidar_topic_name):
     holds the LiDAR data, in our case /livox/lidar, it reads only that
     stream and gives us back a Dataset object, which behaves like a list
     of individual LiDAR scans that we can loop through one at a time.
+    
+    This function Opens the big .mcap file and says: "Give me only the LiDAR scans." It ignores the other information.
     """
+    
     lidar_dataset = Dataset.from_file(Path(bag_folder_path), topic=lidar_topic_name)
     return lidar_dataset
+ 
+ 
+ 
+ 
  
  
 def convert_scan_to_open3d(pointcloudset_scan):
@@ -89,7 +98,12 @@ def convert_scan_to_open3d(pointcloudset_scan):
     hand them to Open3D to build a proper point cloud object from them,
     which can then be saved to disk as a .pcd file exactly like our Oxford
     scans.
+    
+    A LiDAR scan initially contains thousands of points.
+    And each point is a (x, y, z) 3D coordinate. This function 
+    converts those numbers into a compatible 3D point cloud that Open3D can work with.
     """
+    
     points_table = pointcloudset_scan.data
     xyz_points = points_table[["x", "y", "z"]].to_numpy(dtype=np.float64)
  
@@ -97,6 +111,11 @@ def convert_scan_to_open3d(pointcloudset_scan):
     open3d_cloud.points = o3d.utility.Vector3dVector(xyz_points)
  
     return open3d_cloud
+ 
+ 
+ 
+ 
+ 
  
  
 def extract_all_scans(lidar_dataset, output_folder):
@@ -111,6 +130,13 @@ def extract_all_scans(lidar_dataset, output_folder):
     printed to the screen, since a Gault recording can contain thousands of
     scans, and it is useful to see progress while it runs rather than
     waiting in silence.
+    
+    This function goes through the LiDAR scans one by one, converts each scan, 
+    and saves each as a separate .pcd file.
+    
+    So:
+    big .mcap → scan1.pcd, scan2.pcd, scan3.pcd, ...
+    
     """
     os.makedirs(output_folder, exist_ok=True)
  
@@ -134,6 +160,11 @@ def extract_all_scans(lidar_dataset, output_folder):
     print(f"\nFinished extracting {extracted_count} scans to {output_folder}")
  
  
+ 
+ 
+ 
+ 
+ 
 def load_odometry_dataset(bag_folder_path, odometry_topic_name):
     """
     This function opens the same ROS2 bag folder a second time, but this
@@ -148,7 +179,12 @@ def load_odometry_dataset(bag_folder_path, odometry_topic_name):
     This function returns a plain Python list, where each entry pairs a
     message's timestamp with its decoded contents, one entry for every
     reading found on the /kiss/odometry topic.
+    
+    This function opens the .mcap but this time says: "Give me the robot's position information."
+    This tells you where the robot was as it moved through the forest.
+    
     """
+    
     typestore = get_typestore(Stores.ROS2_HUMBLE)
     odometry_readings = []
  
@@ -165,6 +201,7 @@ def load_odometry_dataset(bag_folder_path, odometry_topic_name):
     return odometry_readings
  
  
+ 
 def extract_odometry_to_csv(odometry_readings, output_csv_path):
     """
     This function goes through every odometry reading we decoded and pulls
@@ -175,6 +212,9 @@ def extract_odometry_to_csv(odometry_readings, output_csv_path):
     CSV is saved, our existing scan spacing analysis and loop closure
     labeling scripts can read it directly, without needing any changes to
     understand a new file format.
+    
+    This functiom takes all those robot positions and puts them into one CSV file, 
+    organized similarly to the Oxford slam_poses.csv.
     """
     pose_rows = []
  
@@ -197,6 +237,9 @@ def extract_odometry_to_csv(odometry_readings, output_csv_path):
     poses_table.to_csv(output_csv_path, index=False)
  
     print(f"Saved {len(poses_table)} poses to {output_csv_path}")
+ 
+ 
+ 
  
  
 def parse_command_line_arguments():
@@ -225,6 +268,8 @@ def parse_command_line_arguments():
         help="Folder where individual_clouds/ and slam_poses.csv will be created",
     )
     return parser.parse_args()
+ 
+ 
  
  
 if __name__ == "__main__":
