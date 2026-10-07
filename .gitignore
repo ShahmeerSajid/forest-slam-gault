@@ -22,3 +22,7 @@ venv/*.zip
 .DS_Store
 venv/
 
+*.mcap
+Gault Data/gault_sample_bag/
+Gault Data/individual_clouds/
+Gault Data/test_output/
