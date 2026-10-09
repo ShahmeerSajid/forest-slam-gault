@@ -16,6 +16,7 @@
 # 62 GB .mcap file.
 # In plain  words, the process is basically:
 # Robot records of Gault forest collected by Willaim → huge .mcap file → extract LiDAR scans → many small .pcd files → process them like Oxford DataSet
+#                                                                       extract robot-poses too -> csv file
 
 
 
@@ -28,10 +29,10 @@
 # code knows how to read. So the script opens that file and does two separate jobs: first, it 
 # goes through every LiDAR scan and saves each one as its own .pcd file, exactly like the
 # individual scan files we already have for Wytham, Stein-am-Rhein, Forest of Dean and Evo. 
-# Second, it goes through every robot-position reading (the KISS-ICP output William already
+# Second, it goes through every robot-position (pose) reading (the KISS-ICP output William already
 # computed) and saves it as a CSV file with x, y, z coordinates, same columns as Oxford
-# slam_poses.csv files. Once both of these exist for Gault, your voxelization, loop-closure 
-# labeling, and Dataset/DataLoader code can run on Gault without me changing a single line
+# slam_poses.csv files. Once both of these exist for Gault, the voxelization, loop-closure 
+# labeling, and Dataset/DataLoader code can run on Gault without changing a single line
 # of them. To those scripts, Gault just looks like a fifth site.
 
 
@@ -46,7 +47,13 @@
 # save those positions into a CSV file, just like the position file I had for Oxford.
 
 
+# For the results, we can think that thsi script gives us two separate notebooks:
 
+# Think of two separate notebooks.
+# Notebook 1 (scans): a pile of photos, each labeled with the time it was taken. "Photo at 10:00:00.1", "Photo at 10:00:00.2", and so on.
+# Notebook 2 (poses): a list of positions, each with the time it was recorded. "10:00:00.1: robot at x=5, y=2", and so on.
+# Our script made both notebooks from the bag.
+# For Oxford we didn't need this step, because its table already said "this position belongs to this photo."
 
 
 import argparse
