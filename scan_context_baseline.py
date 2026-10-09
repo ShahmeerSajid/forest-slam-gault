@@ -42,6 +42,16 @@ This table is the Scan Context Descriptor/fingerprint for scan 10.
 So, one HUGE point cloud -> compact 20 x 60 fingerprint
 We do the same for Scan 300.
 
+NOTE: We are also using ICP as another baseline apart from the Scan Context. 
+ICP uses Voxel downsampling. Voxel downsampling replaces the points inside each small 
+cube with one point at their average position to reduce the scan’s size. 
+Scan Context instead stores the maximum height in each ring-and-sector cell to 
+describe the surrounding structures. Averaging heights could let many ground points
+hide a few tall tree points, while the maximum preserves that tall feature 
+and helps distinguish places. Therefore, we go for the point with maximum height 
+in Scan Context (unlike in ICP) because Averaging their heights could hide the tree
+but taking the maximum preserves its height.
+
 
 
 3. The 2 Fingerprints' comparisons
@@ -485,7 +495,9 @@ if __name__ == "__main__":
     print("Scan Context baseline results")
     print(f"Settings: {num_rings} rings, {num_sectors} sectors, "
           f"max radius {max_radius:.1f} m, voxel size {voxel_size} m")
-    print("==" * 30)
+    
+    
+    print("\n")
     for site_name, (auc, f1, precision, recall) in results.items():
         print(
             f"{site_name:22s} AUC {auc:.3f} | best F1 {f1:.3f} "
