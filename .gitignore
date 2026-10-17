@@ -26,3 +26,5 @@ venv/
 Gault Data/gault_sample_bag/
 Gault Data/individual_clouds/
 Gault Data/test_output/
+.venv/
+__pycache__/
