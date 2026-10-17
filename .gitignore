@@ -26,3 +26,6 @@ venv/
 Gault Data/gault_sample_bag/
 Gault Data/individual_clouds/
 Gault Data/test_output/
+__pycache__/
+.lsp/
+*.pcd
