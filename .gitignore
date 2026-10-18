@@ -29,3 +29,4 @@ Gault Data/test_output/
 __pycache__/
 .lsp/
 *.pcd
+.venv/
