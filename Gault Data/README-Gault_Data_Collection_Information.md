@@ -94,6 +94,7 @@ the 2 KISS-ICP paths should have roughly the same shapes.
 Each recording treats its own starting position as (0, 0, 0) and its starting direction as “straight ahead.” 
 So the two estimated paths can be shifted or turned relative to each other, even though they describe the same trail.
 
+
 Forexample, we can imagine drawing the trail on two transparent sheets. We can turn an slide one sheet to make the drawings 
 overlap as closely as possible. We cpmapre the points at simolar distances travelled along each path. Forexampel, 500 metres along each route. We then measure the gaps between those points. Those remaining gaps show how much the estimated path shapes differ after removing the difference in starting position and direction.
 

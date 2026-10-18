@@ -14,9 +14,11 @@
 # with a robot, but that data needs the same processing before I can use it.
 # But The LiDAR scans are not separated yet and everything is packed inside an enormous 
 # 62 GB .mcap file.
+
 # In plain  words, the process is basically:
-# Robot records of Gault forest collected by Willaim → huge .mcap file → extract LiDAR scans → many small .pcd files → process them like Oxford DataSet
-#                                                                       extract robot-poses too -> csv file
+# Robot records of Gault forest collected by Willaim → huge .mcap file → 
+# extract LiDAR scans → many small .pcd files → process them like Oxford DataSet
+#  AND extract robot-poses too -> csv file
 
 
 
@@ -26,10 +28,14 @@
 # The script turns William's one big Gault recording into the same two simple things that the
 # Oxford data already has. Right now everything: LiDAR scans, camera images, IMU readings, 
 # robot position, is bundled together inside one mcap file, which none of my existing 
-# code knows how to read. So the script opens that file and does two separate jobs: first, it 
-# goes through every LiDAR scan and saves each one as its own .pcd file, exactly like the
+# code knows how to read. 
+# 
+# So the script opens that file and does two separate jobs: 
+# 
+# 1) First, it goes through every LiDAR scan and saves each one as its own .pcd file, exactly like the
 # individual scan files we already have for Wytham, Stein-am-Rhein, Forest of Dean and Evo. 
-# Second, it goes through every robot-position (pose) reading (the KISS-ICP output William already
+
+# 2) Second, it goes through every robot-position reading (IN the KISS-ICP output William already
 # computed) and saves it as a CSV file with x, y, z coordinates, same columns as Oxford
 # slam_poses.csv files. Once both of these exist for Gault, the voxelization, loop-closure 
 # labeling, and Dataset/DataLoader code can run on Gault without changing a single line
@@ -47,13 +53,33 @@
 # save those positions into a CSV file, just like the position file I had for Oxford.
 
 
-# For the results, we can think that thsi script gives us two separate notebooks:
+# For the results, we can think that this script gives us two separate notebooks:
 
 # Think of two separate notebooks.
 # Notebook 1 (scans): a pile of photos, each labeled with the time it was taken. "Photo at 10:00:00.1", "Photo at 10:00:00.2", and so on.
 # Notebook 2 (poses): a list of positions, each with the time it was recorded. "10:00:00.1: robot at x=5, y=2", and so on.
 # Our script made both notebooks from the bag.
 # For Oxford we didn't need this step, because its table already said "this position belongs to this photo."
+
+
+
+
+# Accordign to the metadata.yaml file, the small 6GB .mcap file I have contains 160,734 messages in total, and each topic is a stream of one kind of reading.
+
+# LiDAR (what we need): /livox/lidar has 3,516 scans. /livox/imu has 6,684 motion readings.
+# Camera (the likely cause of the huge size): colour images (3,495), depth images (about 3,470), and stereo point clouds (3,495), plus a camera IMU.
+# Robot platform: wheel odometry (odom/filtered, 17,037), joystick commands, joint states, battery and emergency stop.
+# RTAB-Map (a camera-based mapping system): its own odometry, map graph, map path and cloud map.
+# KISS-ICP outputs: /kiss/odometry (3,504 poses), /kiss/frame, /kiss/local_map and /kiss/keypoints.
+# Frame transforms and IMU: /tf, /tf_static, /imu/data_raw.
+# Our script only reads two of these: /livox/lidar for the scans and a pose topic such as /kiss/odometry for the poses. The rest, mostly images and depth, is what makes the file 62 GB.
+
+
+
+# Importantly, LiDAR (what we need): /livox/lidar has 3,516 scans.
+# KISS-ICP outputs: /kiss/odometry (3,504 poses)
+# These were inside the small 6gb sample of the large .mcap file colelcted at the Gault Forest by the robot.
+# This script saves the scans as .pcd files and the poses as a CSV (slam_poses.csv).
 
 
 import argparse
