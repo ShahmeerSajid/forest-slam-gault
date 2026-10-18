@@ -30,3 +30,6 @@ __pycache__/
 .lsp/
 *.pcd
 .venv/
+
+Gault Data/gault_results_all.zip
+Gault Data/gault_results_all/
