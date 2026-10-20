@@ -1,0 +1,381 @@
+=== rosbag2_2026_10_06-20_10_27: scans + wheel-odometry poses (without KISS-ICP)
+Loading odometry poses from ROS2 bag...
+Saved 54499 poses to /home/williambonilla/gault_results/rosbag2_2026_10_06-20_10_27/slam_poses_wheel.csv
+
+Loading LiDAR scans from ROS2 bag...
+Extracted 100/10901 scans
+Extracted 200/10901 scans
+Extracted 300/10901 scans
+Extracted 400/10901 scans
+Extracted 500/10901 scans
+Extracted 600/10901 scans
+Extracted 700/10901 scans
+Extracted 800/10901 scans
+Extracted 900/10901 scans
+Extracted 1000/10901 scans
+Extracted 1100/10901 scans
+Extracted 1200/10901 scans
+Extracted 1300/10901 scans
+Extracted 1400/10901 scans
+Extracted 1500/10901 scans
+Extracted 1600/10901 scans
+Extracted 1700/10901 scans
+Extracted 1800/10901 scans
+Extracted 1900/10901 scans
+Extracted 2000/10901 scans
+Extracted 2100/10901 scans
+Extracted 2200/10901 scans
+Extracted 2300/10901 scans
+Extracted 2400/10901 scans
+Extracted 2500/10901 scans
+Extracted 2600/10901 scans
+Extracted 2700/10901 scans
+Extracted 2800/10901 scans
+Extracted 2900/10901 scans
+Extracted 3000/10901 scans
+Extracted 3100/10901 scans
+Extracted 3200/10901 scans
+Extracted 3300/10901 scans
+Extracted 3400/10901 scans
+Extracted 3500/10901 scans
+Extracted 3600/10901 scans
+Extracted 3700/10901 scans
+Extracted 3800/10901 scans
+Extracted 3900/10901 scans
+Extracted 4000/10901 scans
+Extracted 4100/10901 scans
+Extracted 4200/10901 scans
+Extracted 4300/10901 scans
+Extracted 4400/10901 scans
+Extracted 4500/10901 scans
+Extracted 4600/10901 scans
+Extracted 4700/10901 scans
+Extracted 4800/10901 scans
+Extracted 4900/10901 scans
+Extracted 5000/10901 scans
+Extracted 5100/10901 scans
+Extracted 5200/10901 scans
+Extracted 5300/10901 scans
+Extracted 5400/10901 scans
+Extracted 5500/10901 scans
+Extracted 5600/10901 scans
+Extracted 5700/10901 scans
+Extracted 5800/10901 scans
+Extracted 5900/10901 scans
+Extracted 6000/10901 scans
+Extracted 6100/10901 scans
+Extracted 6200/10901 scans
+Extracted 6300/10901 scans
+Extracted 6400/10901 scans
+Extracted 6500/10901 scans
+Extracted 6600/10901 scans
+Extracted 6700/10901 scans
+Extracted 6800/10901 scans
+Extracted 6900/10901 scans
+Extracted 7000/10901 scans
+Extracted 7100/10901 scans
+Extracted 7200/10901 scans
+Extracted 7300/10901 scans
+Extracted 7400/10901 scans
+Extracted 7500/10901 scans
+Extracted 7600/10901 scans
+Extracted 7700/10901 scans
+Extracted 7800/10901 scans
+Extracted 7900/10901 scans
+Extracted 8000/10901 scans
+Extracted 8100/10901 scans
+Extracted 8200/10901 scans
+Extracted 8300/10901 scans
+Extracted 8400/10901 scans
+Extracted 8500/10901 scans
+Extracted 8600/10901 scans
+Extracted 8700/10901 scans
+Extracted 8800/10901 scans
+Extracted 8900/10901 scans
+Extracted 9000/10901 scans
+Extracted 9100/10901 scans
+Extracted 9200/10901 scans
+Extracted 9300/10901 scans
+Extracted 9400/10901 scans
+Extracted 9500/10901 scans
+Extracted 9600/10901 scans
+Extracted 9700/10901 scans
+Extracted 9800/10901 scans
+Extracted 9900/10901 scans
+Extracted 10000/10901 scans
+Extracted 10100/10901 scans
+Extracted 10200/10901 scans
+Extracted 10300/10901 scans
+Extracted 10400/10901 scans
+Extracted 10500/10901 scans
+Extracted 10600/10901 scans
+Extracted 10700/10901 scans
+Extracted 10800/10901 scans
+Extracted 10900/10901 scans
+Extracted 10901/10901 scans
+
+Finished extracting 10901 scans to /home/williambonilla/gault_results/rosbag2_2026_10_06-20_10_27/individual_clouds
+
+Extraction complete.
+=== rosbag2_2026_10_06-20_10_27: KISS-ICP poses
+Loading odometry poses from ROS2 bag...
+Saved 10901 poses to /home/williambonilla/gault_results/rosbag2_2026_10_06-20_10_27/slam_poses_kiss.csv
+=== rosbag2_2026_10_09-18_37_45: scans + wheel-odometry poses (without KISS-ICP)
+Loading odometry poses from ROS2 bag...
+Saved 41344 poses to /home/williambonilla/gault_results/rosbag2_2026_10_09-18_37_45/slam_poses_wheel.csv
+
+Loading LiDAR scans from ROS2 bag...
+Extracted 100/8269 scans
+Extracted 200/8269 scans
+Extracted 300/8269 scans
+Extracted 400/8269 scans
+Extracted 500/8269 scans
+Extracted 600/8269 scans
+Extracted 700/8269 scans
+Extracted 800/8269 scans
+Extracted 900/8269 scans
+Extracted 1000/8269 scans
+Extracted 1100/8269 scans
+Extracted 1200/8269 scans
+Extracted 1300/8269 scans
+Extracted 1400/8269 scans
+Extracted 1500/8269 scans
+Extracted 1600/8269 scans
+Extracted 1700/8269 scans
+Extracted 1800/8269 scans
+Extracted 1900/8269 scans
+Extracted 2000/8269 scans
+Extracted 2100/8269 scans
+Extracted 2200/8269 scans
+Extracted 2300/8269 scans
+Extracted 2400/8269 scans
+Extracted 2500/8269 scans
+Extracted 2600/8269 scans
+Extracted 2700/8269 scans
+Extracted 2800/8269 scans
+Extracted 2900/8269 scans
+Extracted 3000/8269 scans
+Extracted 3100/8269 scans
+Extracted 3200/8269 scans
+Extracted 3300/8269 scans
+Extracted 3400/8269 scans
+Extracted 3500/8269 scans
+Extracted 3600/8269 scans
+Extracted 3700/8269 scans
+Extracted 3800/8269 scans
+Extracted 3900/8269 scans
+Extracted 4000/8269 scans
+Extracted 4100/8269 scans
+Extracted 4200/8269 scans
+Extracted 4300/8269 scans
+Extracted 4400/8269 scans
+Extracted 4500/8269 scans
+Extracted 4600/8269 scans
+Extracted 4700/8269 scans
+Extracted 4800/8269 scans
+Extracted 4900/8269 scans
+Extracted 5000/8269 scans
+Extracted 5100/8269 scans
+Extracted 5200/8269 scans
+Extracted 5300/8269 scans
+Extracted 5400/8269 scans
+Extracted 5500/8269 scans
+Extracted 5600/8269 scans
+Extracted 5700/8269 scans
+Extracted 5800/8269 scans
+Extracted 5900/8269 scans
+Extracted 6000/8269 scans
+Extracted 6100/8269 scans
+Extracted 6200/8269 scans
+Extracted 6300/8269 scans
+Extracted 6400/8269 scans
+Extracted 6500/8269 scans
+Extracted 6600/8269 scans
+Extracted 6700/8269 scans
+Extracted 6800/8269 scans
+Extracted 6900/8269 scans
+Extracted 7000/8269 scans
+Extracted 7100/8269 scans
+Extracted 7200/8269 scans
+Extracted 7300/8269 scans
+Extracted 7400/8269 scans
+Extracted 7500/8269 scans
+Extracted 7600/8269 scans
+Extracted 7700/8269 scans
+Extracted 7800/8269 scans
+Extracted 7900/8269 scans
+Extracted 8000/8269 scans
+Extracted 8100/8269 scans
+Extracted 8200/8269 scans
+Extracted 8269/8269 scans
+
+Finished extracting 8269 scans to /home/williambonilla/gault_results/rosbag2_2026_10_09-18_37_45/individual_clouds
+
+Extraction complete.
+=== rosbag2_2026_10_09-18_37_45: KISS-ICP poses
+Loading odometry poses from ROS2 bag...
+Saved 8269 poses to /home/williambonilla/gault_results/rosbag2_2026_10_09-18_37_45/slam_poses_kiss.csv
+=== rosbag2_2026_10_15-20_23_40: scans + wheel-odometry poses (without KISS-ICP)
+Loading odometry poses from ROS2 bag...
+Saved 36931 poses to /home/williambonilla/gault_results/rosbag2_2026_10_15-20_23_40/slam_poses_wheel.csv
+
+Loading LiDAR scans from ROS2 bag...
+Extracted 100/7387 scans
+Extracted 200/7387 scans
+Extracted 300/7387 scans
+Extracted 400/7387 scans
+Extracted 500/7387 scans
+Extracted 600/7387 scans
+Extracted 700/7387 scans
+Extracted 800/7387 scans
+Extracted 900/7387 scans
+Extracted 1000/7387 scans
+Extracted 1100/7387 scans
+Extracted 1200/7387 scans
+Extracted 1300/7387 scans
+Extracted 1400/7387 scans
+Extracted 1500/7387 scans
+Extracted 1600/7387 scans
+Extracted 1700/7387 scans
+Extracted 1800/7387 scans
+Extracted 1900/7387 scans
+Extracted 2000/7387 scans
+Extracted 2100/7387 scans
+Extracted 2200/7387 scans
+Extracted 2300/7387 scans
+Extracted 2400/7387 scans
+Extracted 2500/7387 scans
+Extracted 2600/7387 scans
+Extracted 2700/7387 scans
+Extracted 2800/7387 scans
+Extracted 2900/7387 scans
+Extracted 3000/7387 scans
+Extracted 3100/7387 scans
+Extracted 3200/7387 scans
+Extracted 3300/7387 scans
+Extracted 3400/7387 scans
+Extracted 3500/7387 scans
+Extracted 3600/7387 scans
+Extracted 3700/7387 scans
+Extracted 3800/7387 scans
+Extracted 3900/7387 scans
+Extracted 4000/7387 scans
+Extracted 4100/7387 scans
+Extracted 4200/7387 scans
+Extracted 4300/7387 scans
+Extracted 4400/7387 scans
+Extracted 4500/7387 scans
+Extracted 4600/7387 scans
+Extracted 4700/7387 scans
+Extracted 4800/7387 scans
+Extracted 4900/7387 scans
+Extracted 5000/7387 scans
+Extracted 5100/7387 scans
+Extracted 5200/7387 scans
+Extracted 5300/7387 scans
+Extracted 5400/7387 scans
+Extracted 5500/7387 scans
+Extracted 5600/7387 scans
+Extracted 5700/7387 scans
+Extracted 5800/7387 scans
+Extracted 5900/7387 scans
+Extracted 6000/7387 scans
+Extracted 6100/7387 scans
+Extracted 6200/7387 scans
+Extracted 6300/7387 scans
+Extracted 6400/7387 scans
+Extracted 6500/7387 scans
+Extracted 6600/7387 scans
+Extracted 6700/7387 scans
+Extracted 6800/7387 scans
+Extracted 6900/7387 scans
+Extracted 7000/7387 scans
+Extracted 7100/7387 scans
+Extracted 7200/7387 scans
+Extracted 7300/7387 scans
+Extracted 7387/7387 scans
+
+Finished extracting 7387 scans to /home/williambonilla/gault_results/rosbag2_2026_10_15-20_23_40/individual_clouds
+
+Extraction complete.
+=== rosbag2_2026_10_15-20_23_40: adding KISS-ICP
+KISS-ICP 100/7387 scans
+KISS-ICP 200/7387 scans
+KISS-ICP 300/7387 scans
+KISS-ICP 400/7387 scans
+KISS-ICP 500/7387 scans
+KISS-ICP 600/7387 scans
+KISS-ICP 700/7387 scans
+KISS-ICP 800/7387 scans
+KISS-ICP 900/7387 scans
+KISS-ICP 1000/7387 scans
+KISS-ICP 1100/7387 scans
+KISS-ICP 1200/7387 scans
+KISS-ICP 1300/7387 scans
+KISS-ICP 1400/7387 scans
+KISS-ICP 1500/7387 scans
+KISS-ICP 1600/7387 scans
+KISS-ICP 1700/7387 scans
+KISS-ICP 1800/7387 scans
+KISS-ICP 1900/7387 scans
+KISS-ICP 2000/7387 scans
+KISS-ICP 2100/7387 scans
+KISS-ICP 2200/7387 scans
+KISS-ICP 2300/7387 scans
+KISS-ICP 2400/7387 scans
+KISS-ICP 2500/7387 scans
+KISS-ICP 2600/7387 scans
+KISS-ICP 2700/7387 scans
+KISS-ICP 2800/7387 scans
+KISS-ICP 2900/7387 scans
+KISS-ICP 3000/7387 scans
+KISS-ICP 3100/7387 scans
+KISS-ICP 3200/7387 scans
+KISS-ICP 3300/7387 scans
+KISS-ICP 3400/7387 scans
+KISS-ICP 3500/7387 scans
+KISS-ICP 3600/7387 scans
+KISS-ICP 3700/7387 scans
+KISS-ICP 3800/7387 scans
+KISS-ICP 3900/7387 scans
+KISS-ICP 4000/7387 scans
+KISS-ICP 4100/7387 scans
+KISS-ICP 4200/7387 scans
+KISS-ICP 4300/7387 scans
+KISS-ICP 4400/7387 scans
+KISS-ICP 4500/7387 scans
+KISS-ICP 4600/7387 scans
+KISS-ICP 4700/7387 scans
+KISS-ICP 4800/7387 scans
+KISS-ICP 4900/7387 scans
+KISS-ICP 5000/7387 scans
+KISS-ICP 5100/7387 scans
+KISS-ICP 5200/7387 scans
+KISS-ICP 5300/7387 scans
+KISS-ICP 5400/7387 scans
+KISS-ICP 5500/7387 scans
+KISS-ICP 5600/7387 scans
+KISS-ICP 5700/7387 scans
+KISS-ICP 5800/7387 scans
+KISS-ICP 5900/7387 scans
+KISS-ICP 6000/7387 scans
+KISS-ICP 6100/7387 scans
+KISS-ICP 6200/7387 scans
+KISS-ICP 6300/7387 scans
+KISS-ICP 6400/7387 scans
+KISS-ICP 6500/7387 scans
+KISS-ICP 6600/7387 scans
+KISS-ICP 6700/7387 scans
+KISS-ICP 6800/7387 scans
+KISS-ICP 6900/7387 scans
+KISS-ICP 7000/7387 scans
+KISS-ICP 7100/7387 scans
+KISS-ICP 7200/7387 scans
+KISS-ICP 7300/7387 scans
+KISS-ICP 7387/7387 scans
+Augmented bag: /home/williambonilla/augmented_bags/rosbag2_2026_10_15-20_23_40_augmented
+Poses: /home/williambonilla/augmented_bags/rosbag2_2026_10_15-20_23_40_augmented_kiss_slam_poses.csv
+=== rosbag2_2026_10_15-20_23_40: KISS-ICP poses
+Loading odometry poses from ROS2 bag...
+Saved 7387 poses to /home/williambonilla/gault_results/rosbag2_2026_10_15-20_23_40/slam_poses_kiss.csv
+ALL DONE

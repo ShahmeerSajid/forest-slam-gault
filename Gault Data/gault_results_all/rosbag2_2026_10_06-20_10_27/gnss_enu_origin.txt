@@ -1,0 +1,2 @@
+ENU origin (first fix of /w200_0110/sensors/ins_0/gps_0/fix): lat 45.378034141 lon -71.940724684 alt 184.216
+x=east, y=north, z=up (metres). Poses are the mean of the two antennas.
