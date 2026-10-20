@@ -32,4 +32,5 @@ __pycache__/
 .venv/
 
 Gault Data/gault_results_all.zip
-Gault Data/gault_results_all/
+individual_clouds/
+/Gault Data/**/*.csv
