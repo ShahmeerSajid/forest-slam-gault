@@ -4,7 +4,6 @@
 
 LoGG3D-Net is a published neural network that turns one LiDAR scan into a short list of numbers, called a descriptor. Two scans of the same place should get descriptors that are close to each other, and scans of different places should get descriptors that are far apart. We use it as a third baseline next to Scan Context and ICP. The file `logg3d_baseline.py` loads the network with the authors' released weights, turns every scan of our labeled Oxford pairs into a descriptor, measures the distance between the two descriptors of each pair, and reports ROC AUC and best F1 for each of the four forest sites. No training happens in this step. The weights come from the authors and were trained on city data (KITTI and MulRan), so a low score on forests is an expected and reportable result, not a bug.
 
-The code was only tested with a fake stand-in model, to check the file reading, the scoring and the output. It has not yet been run with the real network, because that needs an NVIDIA GPU. If something fails on the first real run, the error message will most likely come from loading the model or from TorchSparse, and it should be sent back so it can be fixed.
 
 ## What you need
 
@@ -69,24 +68,3 @@ The script prints, for each of the four sites, the number of pairs, the ROC AUC,
 ## Things to know before trusting the numbers
 
 The network expects four numbers per point, which are x, y, z and the LiDAR intensity. Our voxelized Oxford scans only have x, y and z, so the script fills the fourth number with a constant. The default is 0, while the authors' own training loader for custom data uses 1. When we compare the pretrained model with the fine-tuned model, both must use the same constant, so pick one value and use it for every run. The pretrained weights saw real intensity values on city data, so this is one more reason a low forest score is expected, and it should be written in the report.
-
-## Step 6 (later): Fine-tuning on Oxford
-
-Fine-tuning means starting from these same weights and training a little more on our Oxford scans, then scoring the new weight file with the same script. Two helper scripts prepare it. `patch_logg3d_for_oxford.py` makes four small edits to the cloned repository, because the authors' training code cannot train on a custom dataset as released. `make_logg3d_training_pickle.py` builds the training file from our poses, and it leaves one site out so that site stays unseen for testing. Run them like this.
-
-```
-python3 patch_logg3d_for_oxford.py --repo-folder LoGG3D-Net
-python3 make_logg3d_training_pickle.py --hold-out wytham_data
-```
-
-The training command itself has not been tested yet and will be added here after the first GPU run. The new checkpoint is scored with `python3 logg3d_baseline.py --checkpoint <new file>`, and only on the held-out site, since the other three sites were part of its training.
-
-## Git
-
-Add this to `.gitignore` before committing, so the repository and the weights are never uploaded.
-
-```
-LoGG3D-Net/
-*.pth
-*.pickle
-```
