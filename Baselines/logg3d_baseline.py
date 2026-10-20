@@ -17,6 +17,12 @@ LoGG3D-Net uses a sparse 3D CNN.
 - It combines the features it finds into one descriptor representing the scan’s place.
 “Sparse” means it focuses on occupied cubes instead of processing all the empty space.
 
+A sparse 3D CNN is a neural network that finds patterns in 3D data, such as my LiDAR scans.
+- 3D: It processes shapes in space, rather than pixels in a flat image.
+- CNN: It learns local patterns, such as surfaces and edges.
+- Sparse: It processes occupied voxels—small cubes containing scan points—while skipping empty space to save computation.
+In LoGG3D-Net, these learned features are combined into a descriptor representing the place.
+
 The purpose of this code is to find out how well an existing learned method, 
 used as it comes, does on our forest scans. We do not train it. We load the 
 weights the authors published, run every scan of every labeled pair through
