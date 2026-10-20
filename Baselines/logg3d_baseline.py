@@ -1,6 +1,6 @@
 """
 LoGG3D-Net Baseline Script
-Forest SLAM Project - Oxford Dataset
+
 
 This is our third baseline, to sit next to Scan Context and ICP. Scan
 Context and ICP are classical methods that need no training. 
