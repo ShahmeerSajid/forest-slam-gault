@@ -97,6 +97,24 @@ Scan points + model with pretrained weights → descriptor
 The weights stay the same for every scan, but each scan produces its own descriptor because its points are different.
 
 
+Important to know:
+1) What do the LoGG3D weights do?
+
+The network uses those learned weights to turn each scan into a descriptor. The weights were
+trained so that scans of the same place should produce similar descriptors, while different 
+places should produce different ones.
+
+
+2) How do we compare pairs and calculate performance?
+
+Our baseline code handles this:
+1. Give scan A to LoGG3D → descriptor A.
+2. Give scan B to LoGG3D → descriptor B.
+3. Use cosine_distance() to compare the descriptors. Smaller distance suggests the same place.
+4. Compare that prediction with the correct label in your CSV, previously created using the robot’s positions.
+5. Calculate AUC, F1, precision, and recall using our functions imported from scan_context_baseline.py.
+So,the Logg3D-Net authors’ repo produces the descriptors. Our baseline compares them and evaluates the results.
+
 """
 
 import os
@@ -191,12 +209,13 @@ def load_model(repo_folder, checkpoint_path):
     """
     
     
-    if not torch.cuda.is_available():
-        raise RuntimeError(
-            "LoGG3D-Net needs an NVIDIA GPU with CUDA. Run this script on a GPU machine."
-        )
+    # if not torch.cuda.is_available():
+    #     raise RuntimeError(
+    #         "LoGG3D-Net needs an NVIDIA GPU with CUDA. Run this script on a GPU machine."
+    #     )
         
         
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
     if not os.path.isdir(repo_folder):
         raise FileNotFoundError(f"LoGG3D-Net code folder not found: {repo_folder}")
@@ -213,7 +232,7 @@ def load_model(repo_folder, checkpoint_path):
     model = get_pipeline("LOGG3D")
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     model.load_state_dict(checkpoint["model_state_dict"])
-    model = model.cuda()
+    model = model.to(device)
     model.eval()
     return model, make_sparse_tensor
 
@@ -237,6 +256,8 @@ def compute_descriptor(scan_name, voxel_folder, model, make_sparse_tensor, voxel
     maximally different.
     """
     
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
     if scan_name not in remembered_descriptors:
         points = load_scan_points(os.path.join(voxel_folder, f"{scan_name}.pcd"))
 
@@ -247,7 +268,7 @@ def compute_descriptor(scan_name, voxel_folder, model, make_sparse_tensor, voxel
             network_input = np.hstack([points.astype(np.float32), intensity_column])
 
             with torch.no_grad():
-                sparse_input = make_sparse_tensor(network_input, voxel_size).cuda()
+                sparse_input = make_sparse_tensor(network_input, voxel_size).to(device)
                 descriptor, _ = model(sparse_input)
 
             remembered_descriptors[scan_name] = descriptor.cpu().numpy().reshape(-1)
@@ -299,6 +320,7 @@ def score_pairs_for_site(site_folder, voxel_size, model, make_sparse_tensor, int
     same order, ready for the AUC and F1 measures, and it prints its
     progress every 250 pairs because a full run on a site can take a while.
     """
+    
     
     voxel_folder = os.path.join(site_folder, f"individual_clouds_voxel_{voxel_size:.2f}m")
     pairs_table = pd.read_csv(find_labels_file(site_folder))
@@ -389,3 +411,11 @@ if __name__ == "__main__":
             f"{site_name:22s} AUC {auc:.3f} | best F1 {f1:.3f} "
             f"(precision {precision:.3f}, recall {recall:.3f})"
         )
+
+
+
+# wytham_data            AUC 0.806 | best F1 0.612 (precision 0.554, recall 0.683)
+# stein-am-rhein_data    AUC 0.764 | best F1 0.560 (precision 0.522, recall 0.604)
+# forest-of-dean_data    AUC 0.923 | best F1 0.806 (precision 0.943, recall 0.704)
+# evo_data               AUC 0.868 | best F1 0.666 (precision 0.609, recall 0.735)
+# (venv) shahmeer@ShahmeersLaptop Baselines %

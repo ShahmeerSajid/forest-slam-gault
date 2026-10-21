@@ -515,3 +515,53 @@ if __name__ == "__main__":
             f"{site_name:22s} AUC {auc:.3f} | best F1 {f1:.3f} "
             f"(precision {precision:.3f}, recall {recall:.3f})"
         )
+
+
+
+
+
+
+# shahmeer@ShahmeersLaptop Baselines % python scan_context_baseline.py
+
+# Measuring scan geometry from a sample of scans:
+
+#   wytham_data: median distance of scan centre from origin = 0.68 m
+#   stein-am-rhein_data: median distance of scan centre from origin = 1.21 m
+#   forest-of-dean_data: median distance of scan centre from origin = 0.67 m
+#   evo_data: median distance of scan centre from origin = 2.94 m
+#   99th percentile of distance from sensor: 50.96 m
+#   1st percentile of height: -5.18 m
+
+# Scoring pairs for wytham_data
+#     scored 240/240 pairs
+
+# Scoring pairs for stein-am-rhein_data
+#     scored 500/1576 pairs
+#     scored 1000/1576 pairs
+#     scored 1500/1576 pairs
+#     scored 1576/1576 pairs
+
+# Scoring pairs for forest-of-dean_data
+#     scored 284/284 pairs
+
+# Scoring pairs for evo_data
+#     scored 500/4392 pairs
+#     scored 1000/4392 pairs
+#     scored 1500/4392 pairs
+#     scored 2000/4392 pairs
+#     scored 2500/4392 pairs
+#     scored 3000/4392 pairs
+#     scored 3500/4392 pairs
+#     scored 4000/4392 pairs
+#     scored 4392/4392 pairs
+
+ 
+
+# Scan Context baseline results
+# Settings: 20 rings, 60 sectors, max radius 51.0 m, voxel size 0.1 m
+
+
+# wytham_data            AUC 0.895 | best F1 0.750 (precision 0.706, recall 0.800)
+# stein-am-rhein_data    AUC 0.921 | best F1 0.826 (precision 0.891, recall 0.769)
+# forest-of-dean_data    AUC 0.906 | best F1 0.882 (precision 1.000, recall 0.789)
+# evo_data               AUC 0.975 | best F1 0.903 (precision 0.925, recall 0.882)
