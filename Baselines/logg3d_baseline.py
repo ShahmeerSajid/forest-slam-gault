@@ -1,9 +1,9 @@
 """
 LoGG3D-Net Baseline Script
 
+TESTING THE WEIGHTS OF A PRE-TRAINED 3D SPARSE CONVOLUTIONAL NEURAL NETWROK
 
 This is our third baseline, to sit next to Scan Context and ICP. Scan
-Context and ICP are classical methods that need no training. 
 
 LoGG3D-Net is developed by NoRA Lab and it is 
 a learned method, a neural network from the ICRA 2022 paper 
@@ -32,26 +32,7 @@ means the same place, exactly as in the Scan Context script. We then grade it
 with the same AUC and best F1 measures on the same labeled pairs, so all
 three baselines can be compared fairly.
 
-What you need before running it:
-1. An NVIDIA GPU with CUDA. LoGG3D-Net is built on TorchSparse, which does
-   not run on a Mac or on a computer without a GPU, so this script has to
-   run on William's GPU machine or another Linux GPU machine.
-2. The authors' code, cloned next to this script as a folder called
-   LoGG3D-Net, from https://github.com/csiro-robotics/LoGG3D-Net, with its
-   environment installed as described in its README (PyTorch, TorchSparse
-   1.4.0, Open3D, torchpack and mpi4py).
-3. The authors' pretrained checkpoints, downloaded from the links in their
-   README and extracted into LoGG3D-Net/checkpoints. Only load checkpoints
-   from the authors, because loading one runs the pickle format's code.
-4. Our voxelized Oxford scans and label files in the same folders the other
-   scripts use. Do not add the LoGG3D-Net folder or its checkpoints to git.
 
-How to run it, from the project folder:
-    python3 logg3d_baseline.py --max-pairs 40
-    python3 logg3d_baseline.py
-    python3 logg3d_baseline.py --checkpoint checkpoints/kitti_10cm_loo/<file>.pth
-
-]
 
 Two things to keep in mind when reading the results. First, the published
 checkpoints were trained on city driving data (KITTI and MulRan), so weaker
@@ -72,19 +53,42 @@ may lower its scores a little.
 Imagine we want to ask: “Do these two scans show the same place?”
 
 The goal is simple: give the model two forest scans and check whether it recognizes the same place.
-Each function has one job:
-1. parse_command_line_arguments() — reads the settings.
-   For example: “Use this checkpoint” or “Test only 40 pairs.” 
-2. load_model() — gets the model ready.
-   First, it builds the neural network. Then it loads the authors’ saved weights into it. The model is now ready to examine scans using what it already learned.
-3. compute_descriptor() — gives one scan to the model.
-   It opens a scan file containing the LiDAR points and prepares those points for the model. The model turns the scan into a short list of numbers describing the place. This list is called a descriptor. It keeps the result in memory to reuse later.
-4. cosine_distance() — compares two lists of numbers.
-   Once both scans have descriptors, this function compares them. A small difference suggests the same place; a large difference suggests different places.
-5. score_pairs_for_site() — repeats this for one forest.
-   It reads your CSV, which says which two scans to compare and whether they really show the same place. For each pair, it gets both descriptors and compares them. It keeps the comparison score alongside the correct answer.
-6. The main block — runs the whole process.
-   It loads the model, tests each forest, and calculates the performance scores using the correct answers.
+1. Get the model and its learned weights. We downloaded the authors’ LoGG3D-Net code and
+pretrained checkpoint. 
+The code defines the neural network; the checkpoint contains the weights it learned 
+from MulRan data. We built that same network and loaded those weights into it. We 
+wanted to test its existing ability on the Oxford forests.
+
+2. Locate the Oxford scans and labelled pairs. Oxford data contains individual .pcd scan
+files and CSV files listing pairs of scans. Each pair has a correct label saying whether 
+the scans represent the same place or different places, based on the pose-based rules. 
+We never give the weights those rukes.
+
+3. Prepare each scan for the network. The script opens a .pcd file and reads its points 
+as x, y, z coordinates. It adds a fourth column filled with zero because your processed
+scans lack intensity. The authors’ preparation function then assigns points to voxels, 
+keeps one point per occupied voxel, and packages the data into a sparse tensor. This is
+the input passed to the network!!
+
+4. Turn each scan into a descriptor. The network processes the prepared points using 
+the pretrained weights. Its output is a descriptor: a list of numbers representing the 
+scan’s place. Scan A produces descriptor A, and scan B independently produces descriptor B. 
+The weights remain unchanged throughout this process: no training or fine-tuning happens.
+
+5. Compare the two descriptors. Our baseline script uses cosine distance to measure how 
+different descriptor A and descriptor B are. A smaller distance suggests the scans show 
+the same place; a larger distance suggests different places. This produces one distance 
+score for each pair. Descriptors are remembered so a scan appearing in several pairs 
+doesn’t need to pass through the network repeatedly.
+
+6. Check the scores against the correct labels. Our evaluation functions compare 
+those distance scores with the labels from the slam_poses CSV files. They try different distance 
+cutoffs to calculate precision, recall, and the highest F1, and calculate ROC-AUC 
+to measure how well the scores separate matches from non-matches. Finally, the
+script prints results for each forest. Your results describe the sampled 
+pairs; the full evaluation tests all available labelled pairs.
+
+
 For example, for scan A and scan B:
 - Give scan A to the model → get its numbers.
 - Give scan B to the model → get its numbers.
@@ -97,7 +101,7 @@ Scan points + model with pretrained weights → descriptor
 The weights stay the same for every scan, but each scan produces its own descriptor because its points are different.
 
 
-Important to know:
+
 1) What do the LoGG3D weights do?
 
 The network uses those learned weights to turn each scan into a descriptor. The weights were
@@ -116,6 +120,10 @@ Our baseline code handles this:
 So,the Logg3D-Net authors’ repo produces the descriptors. Our baseline compares them and evaluates the results.
 
 """
+
+
+
+
 
 import os
 import sys
