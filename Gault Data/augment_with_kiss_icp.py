@@ -110,7 +110,7 @@ def augment(bag_folder, out_folder, lidar_topic, odom_topic, max_range, min_rang
         mapping = {}
         for c in reader.connections:
             mapping[c.id] = writer.add_connection(
-                c.topic, c.msgtype, msgdef=c.msgdef.data, rihs01=c.digest,
+                c.topic, c.msgtype, msgdef=c.msgdef.data, rihs01=c.digest or "RIHS01_" + "0" * 64,  # recovered bags may have no type hashes
                 serialization_format=c.ext.serialization_format,
                 offered_qos_profiles=c.ext.offered_qos_profiles)
         odom_conn = writer.add_connection(odom_topic, "nav_msgs/msg/Odometry", typestore=typestore)
