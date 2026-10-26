@@ -106,7 +106,19 @@ python3 patch_logg3d_for_oxford.py --repo-folder LoGG3D-Net
 python3 make_logg3d_training_pickle.py --hold-out wytham_data
 ```
 
-The training command itself has not been tested yet and will be added here after the first GPU run. The new checkpoint is scored with `python3 logg3d_baseline.py --checkpoint <new file>`, and only on the held-out site, since the other three sites were part of its training.
+The patch script makes six edits, which also include making the `--train_pickles` setting readable from the command line and saving every epoch to its own checkpoint file, since the authors' code overwrites one file each epoch. Before any GPU time is used, check the whole chain on the CPU with a few real training steps. The script prints the size of each batch and the three loss values, which is a good way to see what one training step is.
+
+```
+python3 cpu_smoke_test_logg3d.py --pickle oxford_train_holdout_wytham_data.pickle --data-root .. --checkpoint LoGG3D-Net/checkpoints/mulran_10cm/2021-09-14_08-59-00_3n24h_MulRan_v10_q29_4s_263039.pth --steps 10
+```
+
+The real run goes through `finetune_logg3d.py`, which needs a name and a written reason for every run, saves the settings in `runs/<name>/config.json`, and copies the whole training output into `runs/<name>/train.log`. Anyone who runs it, on any machine, leaves the same record behind. A first run, with Wytham held out, looks like this, and `--dry-run` prints the command without training.
+
+```
+python3 finetune_logg3d.py --run-name wytham_lr1e-4 --hold-out wytham_data --learning-rate 1e-4 --epochs 5 --reason "small rate keeps the pretrained weights"
+```
+
+None of the training code has been run with the real network yet, only checked for syntax and tested on fake files, so the first smoke test may show errors that need fixing. Each saved epoch is scored with `python3 logg3d_baseline.py --checkpoint <epoch file>`, and only on the held-out site, since the other three sites were part of its training. The score of each epoch is compared with the pretrained score on the same site.
 
 ## Git
 

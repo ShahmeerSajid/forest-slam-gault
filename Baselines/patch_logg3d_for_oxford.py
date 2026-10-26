@@ -7,14 +7,20 @@ but it is not fully connected in the released code. The training script
 only knows the KITTI and MulRan loaders, and the general loader asks for
 settings (bushwalk_dir, ugv_dir, apollo_dir, downsample) that the training
 config does not define, so training on our own data stops with an error
-before it starts. This script makes four small edits inside the cloned
+before it starts. This script makes six small edits inside the cloned
 LoGG3D-Net folder to connect the pieces. It adds the missing settings to
 config/train_config.py, registers the general loaders in
 utils/data_loaders/make_dataloader.py, and changes how training/train.py
 starts from a checkpoint, so that it loads only the saved weights, begins
 at epoch 0 with a fresh optimizer, and can read a checkpoint that has no
 optimizer inside. The last one is what fine-tuning needs, since the
-released checkpoints may hold only weights.
+released checkpoints may hold only weights. Two more edits fix problems
+found by reading the training code. The command line cannot pass the
+train_pickles setting as released, because it is declared as a plain dict
+type, which cannot be built from text, so it is changed to read a Python
+dictionary written as text. And training saves every epoch to the same file
+name, so each epoch overwrites the one before, and the edit adds the epoch
+number to the file name so every epoch is kept.
 
 Each edited file is first copied to a .orig file next to it, and running
 the script twice is safe, because an edit that is already in place is
@@ -26,9 +32,6 @@ blindly.
 How to run it:
     python3 patch_logg3d_for_oxford.py --repo-folder LoGG3D-Net
 """
-
-
-
 
 import argparse
 import os
@@ -43,8 +46,6 @@ def parse_command_line_arguments():
     parser = argparse.ArgumentParser(description="Patch a LoGG3D-Net clone for training on Oxford data.")
     parser.add_argument("--repo-folder", default="LoGG3D-Net", help="Path to the cloned LoGG3D-Net folder.")
     return parser.parse_args()
-
-
 
 
 def apply_edit(file_path, old_text, new_text, marker):
@@ -77,8 +78,6 @@ def apply_edit(file_path, old_text, new_text, marker):
     print(f"  patched: {file_path}")
 
 
-
-
 def patch_train_config(repo_folder):
     """
     This function adds the settings the general loader reads but the config
@@ -106,9 +105,6 @@ def patch_train_config(repo_folder):
     apply_edit(file_path, old_gp, new_gp, "'bushwalk': 1.5")
 
 
-
-
-
 def patch_dataloader_factory(repo_folder):
     """
     This function makes the training script able to find the general
@@ -130,9 +126,6 @@ def patch_dataloader_factory(repo_folder):
         "    GeneralTupleDataset, GeneralSparseTupleDataset, GeneralPointSparseTupleDataset\n]"
     )
     apply_edit(file_path, old_list, new_list, "GeneralPointSparseTupleDataset\n]")
-
-
-
 
 
 def patch_resume_logic(repo_folder):
@@ -161,7 +154,26 @@ def patch_resume_logic(repo_folder):
     apply_edit(file_path, old_text, new_text, "OXFORD_PATCH")
 
 
+def patch_pickle_setting_and_checkpoint_names(repo_folder):
+    """
+    This function makes two more edits. In the config, the train_pickles
+    setting is changed from the plain dict type, which fails on any text
+    given on the command line, to a reader for Python dictionaries written
+    as text, so that --train_pickles "{'bushwalk': '/path/file.pickle'}"
+    works. In training/train.py, the saved checkpoint name gets the epoch
+    number added, so that each epoch is written to its own file and we can
+    later score every epoch and find the one where the held-out score is
+    best.
+    """
+    config_path = os.path.join(repo_folder, "config", "train_config.py")
+    old_type = "data_arg.add_argument('--train_pickles', type=dict, default={"
+    new_type = "data_arg.add_argument('--train_pickles', type=__import__('ast').literal_eval, default={"
+    apply_edit(config_path, old_type, new_type, "__import__('ast').literal_eval")
 
+    train_path = os.path.join(repo_folder, "training", "train.py")
+    old_name = "            save_path = str(save_path) + '/' + cfg.experiment_name\n"
+    new_name = "            save_path = str(save_path) + '/' + cfg.experiment_name + '_epoch' + str(epoch)  # OXFORD_PATCH\n"
+    apply_edit(train_path, old_name, new_name, "'_epoch' + str(epoch)")
 
 
 if __name__ == "__main__":
@@ -175,4 +187,6 @@ if __name__ == "__main__":
     patch_dataloader_factory(args.repo_folder)
     print("Patching checkpoint loading...")
     patch_resume_logic(args.repo_folder)
+    print("Patching pickle setting and checkpoint names...")
+    patch_pickle_setting_and_checkpoint_names(args.repo_folder)
     print("\nDone. Originals are saved next to each file as .orig")
